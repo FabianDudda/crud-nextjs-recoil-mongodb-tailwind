@@ -1,7 +1,18 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import { RecoilRoot } from "recoil";
+import { QueryClientProvider, QueryClient } from "react-query";
+
+const queryClient = new QueryClient();
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <Component {...pageProps} />
+      </RecoilRoot>
+    </QueryClientProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
